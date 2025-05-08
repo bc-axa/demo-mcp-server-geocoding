@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: mcp-server-geocode-city
+
+  ai:
+    mcp:
+      server:
+        name: mcp-server-geocode-city
+
+server:
+  port: 8082
+
+api:
+  geocoding:
+    api-key: 29e0d139b8ff404fabd873b4e4d3951a
+
