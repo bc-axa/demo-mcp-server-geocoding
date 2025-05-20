@@ -1,7 +1,10 @@
 package com.example.mcp_server_geocode_city;
 
+import com.example.mcp_server_geocode_city.record.Coordinates;
+import com.example.mcp_server_geocode_city.record.GeocodingResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +21,21 @@ public class GeocodingService {
     private String API_KEY;
 
     private final RestTemplate restTemplate;
+
+    @Tool(description = "Get the latitude and longitude for a given city name")
+    public Coordinates getCoordinates(String city) {
+        if (city == null) {
+            throw new IllegalArgumentException("city is null");
+        }
+        var geocodeResp = geocode(city);
+        if (geocodeResp == null) {
+            throw new RuntimeException("Geocode not found");
+        }
+        var feature = geocodeResp.features().getFirst();
+
+        log.info("city {} latitude {} loongitude {} ", city, feature.properties().lat(), feature.properties().lon());
+        return new Coordinates(feature.properties().lat(), feature.properties().lon());
+    }
 
     public GeocodingResponse geocode(String location) {
         var url = String.format(API_URL + API_REQUEST_PARAMS, location, "FRANCE", API_KEY);
