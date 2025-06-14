@@ -2,11 +2,6 @@ spring:
   application:
     name: mcp-server-geocode-city
 
-  ai:
-    mcp:
-      server:
-        name: mcp-server-geocode-city
-
 server:
   port: 8082
 

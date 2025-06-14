@@ -4,7 +4,6 @@ import com.example.mcp_server_geocode_city.record.Coordinates;
 import com.example.mcp_server_geocode_city.record.GeocodingResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +21,6 @@ public class GeocodingService {
 
     private final RestTemplate restTemplate;
 
-    @Tool(description = "Get the latitude and longitude for a given city name")
     public Coordinates getCoordinates(String city) {
         if (city == null) {
             throw new IllegalArgumentException("city is null");
