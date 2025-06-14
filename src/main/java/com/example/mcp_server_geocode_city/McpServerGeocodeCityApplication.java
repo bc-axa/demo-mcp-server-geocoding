@@ -16,20 +16,8 @@ public class McpServerGeocodeCityApplication {
     }
 
     @Bean
-    public ToolCallbackProvider weatherTools(GeocodingService geocodingService) {
+    public ToolCallbackProvider tools(GeocodingService geocodingService) {
         return MethodToolCallbackProvider.builder().toolObjects(geocodingService).build();
     }
-
-//    Local testing
-//    @Bean
-//    CommandLineRunner init(GeocodingService geocodingService) {
-//        return args -> {
-//            var resp = geocodingService.geocode("Lille");
-//            log.info(resp.toString());
-//
-//            var coordinates = geocodingService.getCoordinates("Lille");
-//            log.info(coordinates.toString());
-//        };
-//    }
 
 }
