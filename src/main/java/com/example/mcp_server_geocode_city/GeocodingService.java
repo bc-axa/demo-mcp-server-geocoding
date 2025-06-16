@@ -27,7 +27,6 @@ public class GeocodingService {
 
         if (StringUtils.isEmpty(city)) {
             return null;
-//            throw new IllegalArgumentException("city can not be empty");
         }
         var geocodeResp = geocode(city);
         if (geocodeResp == null) {
