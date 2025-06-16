@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
@@ -22,8 +23,11 @@ public class GeocodingService {
     private final RestTemplate restTemplate;
 
     public Coordinates getCoordinates(String city) {
-        if (city == null) {
-            throw new IllegalArgumentException("city is null");
+        log.info("getCoordinates for name: >{}<", city);
+
+        if (StringUtils.isEmpty(city)) {
+            return null;
+//            throw new IllegalArgumentException("city can not be empty");
         }
         var geocodeResp = geocode(city);
         if (geocodeResp == null) {
